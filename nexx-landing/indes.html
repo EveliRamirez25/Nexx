@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>NexxInsurance - Protección Sin Límites</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Iconos Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    /* ===========================
+       RESET + BASE
+       =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Nunito Sans", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: #f0f4fb;
+      color: #173976;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    :root {
+      --color-primary: #2f70aa;
+      --color-primary-alt: #4b9cc8;
+      --color-primary-soft: #94b6ce;
+      --color-accent: #75a435;
+      --color-accent-lime: #94c136;
+      --color-navy: #173976;
+      --color-text-main: #173976;
+      --color-text-muted: #667085;
+      --color-bg-page: #f0f4fb;
+      --color-bg-surface: #ffffff;
+      --color-border-subtle: #e0e4ec;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    /* ===========================
+       NAVBAR
+       =========================== */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(224, 228, 236, 0.7);
+      animation: navEnter 0.4s ease-out forwards;
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-navy);
+    }
+
+    .logo-text span {
+      font-weight: 300;
+    }
+
+    .nav-center {
+      display: none;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      background: none;
+      border: none;
+      color: var(--color-text-main);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width 0.15s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-pill {
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: #ffffff;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .nav-toggle {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(209, 213, 219, 0.9);
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .nav-toggle-bar {
+      width: 16px;
+      height: 2px;
+      background: var(--color-text-main);
+      position: relative;
+    }
+
+    .nav-toggle-bar::before,
+    .nav-toggle-bar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 16px;
+      height: 2px;
+      background: var(--color-text-main);
+      transition: transform 0.18s ease, top 0.18s ease, opacity 0.18s ease;
+    }
+
+    .nav-toggle-bar::before {
+      top: -5px;
+    }
+
+    .nav-toggle-bar::after {
+      top: 5px;
+    }
+
+    .nav-toggle--open .nav-toggle-bar {
+      background: transparent;
+    }
+
+    .nav-toggle--open .nav-toggle-bar::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    .nav-toggle--open .nav-toggle-bar::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    .nav-menu-mobile {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px 16px 12px;
+      border-top: 1px solid rgba(224, 228, 236, 0.9);
+      background: #ffffff;
+    }
+
+    .nav-menu-mobile--open {
+      display: flex;
+    }
+
+    /* ===========================
+       HERO
+       =========================== */
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 60px);
+      background: linear-gradient(
+        115deg,
+        var(--color-primary) 0%,
+        var(--color-primary-alt) 35%,
+        var(--color-accent) 75%,
+        var(--color-accent-lime) 100%
+      );
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.14), transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(0,0,0,0.18), transparent 60%);
+      mix-blend-mode: soft-light;
+      opacity: 0.7;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top left,
+        rgba(255, 255, 255, 0.18),
+        transparent
+      );
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding: 72px 0 56px;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-text {
+      max-width: 640px;
+      animation: heroContentEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s
+        forwards;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .hero-logo {
+      max-width: 360px;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+    }
+
+    .hero-logo img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-kicker {
+      font-size: 0.85rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.94);
+      margin-bottom: 26px;
+      max-width: 32rem;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 999px;
+      border: none;
+      background: #ffffff;
+      color: #2f70aa;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        background 0.15s ease, color 0.15s ease;
+    }
+
+    .hero-cta:hover {
+      background: #f5f1e8;
+      color: #2f70aa;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .hero-cta-icon {
+      font-size: 1.2rem;
+    }
+
+    .hero-card {
+      align-self: stretch;
+      max-width: 380px;
+      padding: 1.5rem 1.6rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.24);
+      margin-left: auto;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--color-primary);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card-main {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-card-steps {
+      list-style: none;
+      display: grid;
+      gap: 0.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-card-steps li {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--color-primary);
+    }
+
+    .hero-card-note {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ===========================
+       ABOUT
+       =========================== */
+
+    .about-section {
+      padding: 40px 0 40px;
+      background: #ffffffd8;
+    }
+
+    .about-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .about-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+    }
+
+    .about-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 10px;
+    }
+
+    .about-body {
+      font-size: 1.05rem;
+      color: #666;
+      margin-bottom: 10px;
+      line-height: 1.8;
+    }
+
+    .about-highlight {
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid var(--color-border-subtle);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-highlight__title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
+    .about-highlight__list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .about-highlight__list li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 4px;
+    }
+
+    .about-highlight__list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: var(--color-accent);
+    }
+
+    /* ===========================
+       NUESTROS SEGUROS
+       =========================== */
+
+    .insurance-section {
+      padding: 5.5rem 2rem 5.5rem;
+      background:
+        radial-gradient(circle at top left, rgba(148, 182, 206, 0.35), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(182, 210, 107, 0.35), transparent 55%),
+        #f5f1e8;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.4rem;
+      color: #173976;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      margin-bottom: 3rem;
+      font-weight: 400;
+    }
+
+    .insurance-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .insurance-card {
+      position: relative;
+      background: linear-gradient(145deg, #ffffff, #f9fafb);
+      border-radius: var(--radius-xl);
+      padding: 2.4rem 1.9rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      opacity: 0;
+      transform: translateY(50px);
+      overflow: hidden;
+      min-height: 260px;
+      border: 1px solid rgba(224, 228, 236, 0.9);
+    }
+
+    .insurance-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #2f70aa, #75a435);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .insurance-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .insurance-card:hover {
+      transform: translateY(-14px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(47, 112, 170, 0.26);
+    }
+
+    .insurance-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-front {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: all 0.5s ease;
+    }
+
+    .insurance-card:hover .card-front {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    .card-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--color-primary);
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(148, 182, 206, 0.16);
+      max-width: max-content;
+    }
+
+    .insurance-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 22px;
+      background: radial-gradient(circle at 20% 0%, #ffffff, #dbe7f3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
+      transition: transform 0.45s ease, box-shadow 0.45s ease, background 0.4s ease;
+    }
+
+    .insurance-icon img {
+      width: 72%;
+      height: 72%;
+      display: block;
+    }
+
+    .insurance-card:hover .insurance-icon {
+      transform: translateY(-6px) scale(1.06) rotate(-2deg);
+      background: radial-gradient(circle at 20% 0%, #ffffff, #c9def5);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.32);
+    }
+
+    .card-front h3 {
+      font-size: 1.15rem;
+      color: #173976;
+      margin-bottom: 0.25rem;
+      font-weight: 800;
+    }
+
+    .card-front p {
+      font-size: 0.9rem;
+      color: #667085;
+    }
+
+    .card-description {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 88%;
+      opacity: 0;
+      transition: all 0.5s ease;
+      pointer-events: none;
+    }
+
+    .insurance-card:hover .card-description {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .card-description h3 {
+      font-size: 1.15rem;
+      color: #173976;
+      margin-bottom: 0.6rem;
+      font-weight: 800;
+    }
+
+    .card-description p {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .card-description ul {
+      list-style: none;
+      margin: 0 0 1.2rem;
+      padding: 0;
+      font-size: 0.86rem;
+      color: #555;
+    }
+
+    .card-description ul li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 4px;
+    }
+
+    .card-description ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.45rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #2f70aa, #75a435);
+    }
+
+    .quote-button {
+      padding: 0.75rem 1.8rem;
+      background: linear-gradient(135deg, #2f70aa, #4b9cc8);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 15px rgba(47, 112, 170, 0.3);
+    }
+
+    .quote-button:hover {
+      background: linear-gradient(135deg, #173976, #2f70aa);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(47, 112, 170, 0.4);
+    }
+
+    /* ===========================
+       BRANDS CAROUSEL
+       =========================== */
+
+    .brands-section {
+      padding: 24px 0 28px;
+      background: #f3f4f6;
+    }
+
+    .brands-track {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-inline: 8px;
+    }
+
+    .brands-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .brand-logo {
+      flex: 0 0 auto;
+      min-width: 120px;
+      max-width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.75;
+      filter: grayscale(100%);
+      transition: opacity 0.15s ease, transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .brand-logo:hover {
+      opacity: 1;
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+
+    /* ===========================
+       CONTACTO
+       =========================== */
+
+    .leadform-shell {
+      padding: 40px 0 56px;
+      background: linear-gradient(135deg, #94b6ce 0%, #b6d26b 100%);
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .lead-form {
+      padding: 20px 18px 22px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border-subtle);
+      background: var(--color-bg-surface);
+      box-shadow: var(--shadow-soft);
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    .lead-form::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 60px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    }
+
+    .lead-form h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--color-navy);
+      text-align: center;
+    }
+
+    .lead-form p {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .lead-form__body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #173976;
+    }
+
+    .field input,
+    .field select {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 2px solid #e8dcc8;
+      font-size: 1rem;
+      outline: none;
+      background: #f9fafb;
+      color: var(--color-text-main);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease,
+        background 0.15s ease, transform 0.08s ease;
+      font-family: inherit;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(47, 112, 170, 0.1);
+      background: #ffffff;
+      transform: translateY(-1px) scale(1.005);
+    }
+
+    .lead-form .primary-btn {
+      margin-top: 8px;
+      width: 100%;
+      justify-content: center;
+      padding: 1.1rem;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, #2f70aa, #75a435);
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: none;
+      background: var(--color-primary);
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease, box-shadow 0.15s ease,
+        transform 0.1s ease;
+    }
+
+    .primary-btn:hover {
+      background: #255b8a;
+      box-shadow: 0 12px 28px rgba(47, 112, 170, 0.33);
+      transform: translateY(-1px);
+    }
+
+    /* ===========================
+       UBICACIÓN / MAPA
+       =========================== */
+
+    .cta-map-section {
+      padding: 40px 0 56px;
+      background: #f5f1e8;
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .cta-map {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .cta-map__content {
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-map__title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      margin-bottom: 10px;
+    }
+
+    .cta-map__text {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      margin-bottom: 16px;
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-map__map {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border-subtle);
+      box-shadow: var(--shadow-soft);
+      min-height: 260px;
+    }
+
+    .cta-map__map iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      border: 0;
+    }
+
+    /* ===========================
+       FOOTER
+       =========================== */
+
+    .footer {
+      background: #173976;
+      color: white;
+      padding: 3rem 2rem 2rem;
+      margin-top: 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      line-height: 2;
+      display: block;
+    }
+
+    .footer-section a:hover {
+      color: #b6d26b;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: white;
+    }
+
+    .social-icon i {
+      font-size: 1.1rem;
+    }
+
+    .social-icon:hover {
+      background: #75a435;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.8rem;
+    }
+
+    /* ===========================
+       ANIMACIONES
+       =========================== */
+
+    @keyframes navEnter {
+      from {
+        transform: translateY(-16px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes heroContentEnter {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===========================
+       RESPONSIVE
+       =========================== */
+
+    @media (min-width: 640px) {
+      .hero-title {
+        font-size: 3.2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .navbar-inner {
+        padding-inline: 24px;
+      }
+
+      .nav-center {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: none;
+      }
+
+      .nav-menu-mobile {
+        display: none !important;
+      }
+
+      .hero-inner {
+        padding: 96px 0 72px;
+      }
+
+      .hero-grid {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .hero-text {
+        flex: 3;
+      }
+
+      .hero-card {
+        flex: 2;
+      }
+
+      .about-section {
+        padding: 52px 0 48px;
+      }
+
+      .about-grid {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+      }
+
+      .about-highlight {
+        max-width: 360px;
+      }
+
+      .cta-map {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 32px;
+      }
+
+      .cta-map__content {
+        flex: 1;
+      }
+
+      .cta-map__map {
+        flex: 1;
+        min-height: 300px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 1320px;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <div class="logo-text">Nexx<span>Insurance</span></div>
+
+      <nav class="nav-center">
+        <button class="nav-link" data-target="#home">Home</button>
+        <button class="nav-link" data-target="#seguros">Seguros</button>
+        <button class="nav-link" data-target="#nosotros">Quiénes somos</button>
+        <button class="nav-link" data-target="#contact">Contacto</button>
+        <button class="nav-link" data-target="#ubicacion">Ubicación</button>
+      </nav>
+
+      <div class="nav-right">
+        <button class="lang-pill">ES / EN</button>
+        <button class="nav-toggle" id="navToggle">
+          <div class="nav-toggle-bar"></div>
+        </button>
+      </div>
+    </div>
+    <div class="nav-menu-mobile" id="navMobileMenu">
+      <button class="nav-link" data-target="#home">Home</button>
+      <button class="nav-link" data-target="#seguros">Seguros</button>
+      <button class="nav-link" data-target="#nosotros">Quiénes somos</button>
+      <button class="nav-link" data-target="#contact">Contacto</button>
+      <button class="nav-link" data-target="#ubicacion">Ubicación</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-inner">
+        <div class="hero-grid">
+          <div class="hero-text">
+            <div class="hero-logo">
+              <!-- logo en /public -->
+              <img src="./public/NexxIn.png" alt="NexxInsurance logo">
+            </div>
+
+            <p class="hero-kicker">PROTECCIÓN SIN LÍMITES</p>
+            <h1 class="hero-title">Protección Sin Límites</h1>
+            <p class="hero-subtitle">
+              Aseguramos lo que más valoras con conexión constante y cobertura integral.
+            </p>
+            <button class="hero-cta" data-scroll="#contact">
+              <span>Cotiza ahora</span>
+              <span class="hero-cta-icon">➜</span>
+            </button>
+          </div>
+
+          <aside class="hero-card">
+            <p class="hero-card-title">CÓMO TRABAJAMOS</p>
+            <p class="hero-card-main">
+              Representamos continuidad, protección sin límites y conexión constante con nuestros clientes.
+            </p>
+            <ul class="hero-card-steps">
+              <li><span class="hero-dot"></span> Cuéntanos qué necesitas asegurar.</li>
+              <li><span class="hero-dot"></span> Diseñamos una solución a tu medida.</li>
+              <li><span class="hero-dot"></span> Te acompañamos durante toda la vida de la póliza.</li>
+            </ul>
+            <p class="hero-card-note">
+              Somos más que una aseguradora, somos tu socio de confianza.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIÉNES SOMOS -->
+    <section id="nosotros" class="about-section fade-in">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <p class="about-kicker">Quiénes somos</p>
+            <h2 class="about-title">¿Quiénes Somos?</h2>
+            <p class="about-body">
+              En NexxInsurance, representamos continuidad, protección sin límites y conexión constante con nuestros clientes.
+              Somos más que una aseguradora, somos tu socio de confianza.
+            </p>
+            <p class="about-body">
+              Con años de experiencia en el mercado, nos especializamos en ofrecer soluciones de seguros personalizadas que se adaptan a tus necesidades específicas.
+              Nuestra misión es brindarte tranquilidad y seguridad en cada etapa de tu vida.
+            </p>
+            <p class="about-body">
+              Contamos con un equipo de profesionales altamente capacitados, comprometidos con ofrecer el mejor servicio y atención personalizada para cada cliente.
+            </p>
+          </div>
+          <div class="about-highlight">
+            <h3 class="about-highlight__title">Por qué NexxInsurance</h3>
+            <ul class="about-highlight__list">
+              <li>Soluciones de seguros personalizadas según tu estilo de vida.</li>
+              <li>Equipo experto dedicado a tu tranquilidad.</li>
+              <li>Atención cercana, humana y constante.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NUESTROS SEGUROS -->
+    <section class="insurance-section" id="seguros">
+      <h2 class="section-title">Nuestros Seguros</h2>
+      <p class="section-subtitle">Coberturas diseñadas para cada aspecto de tu vida</p>
+      
+      <div class="insurance-grid">
+        <!-- 1. Auto Insurance -->
+        <article class="insurance-card" data-delay="0">
+          <div class="card-front">
+            <span class="card-label">Auto</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/1.svg" alt="Auto Insurance">
+            </div>
+            <h3>Auto Insurance</h3>
+            <p>Protección total para tu coche y tu camino.</p>
+          </div>
+          <div class="card-description">
+            <h3>Auto Insurance</h3>
+            <p>
+              Cobertura para tu vehículo con asistencia vial, daños a terceros y opciones ampliadas según tu uso diario.
+            </p>
+            <ul>
+              <li>Coberturas básica, limitada y amplia.</li>
+              <li>Asistencia 24/7 en carretera.</li>
+              <li>Opciones para flotillas y uso comercial.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 2. Home Insurance -->
+        <article class="insurance-card" data-delay="80">
+          <div class="card-front">
+            <span class="card-label">Hogar</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/3.svg" alt="Home Insurance">
+            </div>
+            <h3>Home Insurance</h3>
+            <p>Tu hogar, protegido por dentro y por fuera.</p>
+          </div>
+          <div class="card-description">
+            <h3>Home Insurance</h3>
+            <p>
+              Cobertura para la estructura de tu casa, su contenido y responsabilidad civil frente a terceros.
+            </p>
+            <ul>
+              <li>Daños por incendio, robo y fenómenos naturales.</li>
+              <li>Protección de bienes dentro del hogar.</li>
+              <li>Responsabilidad civil familiar.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 3. Health Insurance -->
+        <article class="insurance-card" data-delay="160">
+          <div class="card-front">
+            <span class="card-label">Salud</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/5.svg" alt="Health Insurance">
+            </div>
+            <h3>Health Insurance</h3>
+            <p>Salud protegida, decisiones más ligeras.</p>
+          </div>
+          <div class="card-description">
+            <h3>Health Insurance</h3>
+            <p>
+              Seguros de gastos médicos mayores con acceso a hospitales y especialistas de calidad.
+            </p>
+            <ul>
+              <li>Red de hospitales y doctores certificados.</li>
+              <li>Deducibles y coaseguros flexibles.</li>
+              <li>Beneficios en prevención y check-ups.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 4. Life Insurance -->
+        <article class="insurance-card" data-delay="240">
+          <div class="card-front">
+            <span class="card-label">Vida</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/2.svg" alt="Life Insurance">
+            </div>
+            <h3>Life Insurance</h3>
+            <p>Respaldo financiero para quienes más amas.</p>
+          </div>
+          <div class="card-description">
+            <h3>Life Insurance</h3>
+            <p>
+              Planes de vida que cuidan a tu familia y pueden ayudarte a construir ahorro a largo plazo.
+            </p>
+            <ul>
+              <li>Seguros temporales y vitalicios.</li>
+              <li>Opciones con componente de ahorro o inversión.</li>
+              <li>Indemnizaciones personalizables según tus objetivos.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 5. Hurricane / Flood Insurance -->
+        <article class="insurance-card" data-delay="320">
+          <div class="card-front">
+            <span class="card-label">Clima</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/4.svg" alt="Hurricane Insurance">
+            </div>
+            <h3>Hurricane / Flood Insurance</h3>
+            <p>Tu patrimonio listo para cualquier temporada.</p>
+          </div>
+          <div class="card-description">
+            <h3>Hurricane / Flood Insurance</h3>
+            <p>
+              Coberturas especiales para huracanes, inundaciones y otros fenómenos hidrometeorológicos.
+            </p>
+            <ul>
+              <li>Protección para vivienda, negocio o bodegas.</li>
+              <li>Análisis de riesgo según tu zona.</li>
+              <li>Indemnización por pérdidas parciales o totales.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 6. Business Insurance -->
+        <article class="insurance-card" data-delay="400">
+          <div class="card-front">
+            <span class="card-label">Negocio</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/6.svg" alt="Business Insurance">
+            </div>
+            <h3>Business Insurance</h3>
+            <p>Protege la operación de tu empresa.</p>
+          </div>
+          <div class="card-description">
+            <h3>Business Insurance</h3>
+            <p>
+              Pólizas empresariales para cuidar tus activos, responsabilidad civil y continuidad de negocio.
+            </p>
+            <ul>
+              <li>Soluciones para PYMES y grandes empresas.</li>
+              <li>Coberturas por giro y tamaño de operación.</li>
+              <li>Asesoría en gestión de riesgos.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 7. Condo Insurance -->
+        <article class="insurance-card" data-delay="480">
+          <div class="card-front">
+            <span class="card-label">Condo</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/7.svg" alt="Condo Insurance">
+            </div>
+            <h3>Condo Insurance</h3>
+            <p>Edificios y condominios, siempre respaldados.</p>
+          </div>
+          <div class="card-description">
+            <h3>Condo Insurance</h3>
+            <p>
+              Cobertura integral para condominios y edificios residenciales, incluyendo áreas comunes.
+            </p>
+            <ul>
+              <li>Daños a áreas comunes y estructura.</li>
+              <li>Responsabilidad civil condominal.</li>
+              <li>Opciones para contenido de cada unidad.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 8. Boat Insurance -->
+        <article class="insurance-card" data-delay="560">
+          <div class="card-front">
+            <span class="card-label">Embarcaciones</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/8.svg" alt="Boat Insurance">
+            </div>
+            <h3>Boat Insurance</h3>
+            <p>Navega con respaldo real.</p>
+          </div>
+          <div class="card-description">
+            <h3>Boat Insurance</h3>
+            <p>
+              Seguros para embarcaciones recreativas y comerciales en mar abierto o aguas interiores.
+            </p>
+            <ul>
+              <li>Daños a casco, motor y equipo.</li>
+              <li>Responsabilidad civil a terceros.</li>
+              <li>Coberturas para rutas nacionales e internacionales.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 9. Renters Insurance -->
+        <article class="insurance-card" data-delay="640">
+          <div class="card-front">
+            <span class="card-label">Inquilinos</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/9.svg" alt="Renters Insurance">
+            </div>
+            <h3>Renters Insurance</h3>
+            <p>Si rentas, también puedes estar protegido.</p>
+          </div>
+          <div class="card-description">
+            <h3>Renters Insurance</h3>
+            <p>
+              Protege tus pertenencias y responsabilidad civil aunque no seas dueño del inmueble.
+            </p>
+            <ul>
+              <li>Cobertura de contenido del departamento o casa.</li>
+              <li>Responsabilidad civil frente a terceros.</li>
+              <li>Daños por incendio, robo o agua.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+
+        <!-- 10. Pet Insurance -->
+        <article class="insurance-card" data-delay="720">
+          <div class="card-front">
+            <span class="card-label">Mascotas</span>
+            <div class="insurance-icon">
+              <img src="./src/assets/icons/10.svg" alt="Pet Insurance">
+            </div>
+            <h3>Pet Insurance</h3>
+            <p>Porque son familia, no solo mascotas.</p>
+          </div>
+          <div class="card-description">
+            <h3>Pet Insurance</h3>
+            <p>
+              Pólizas de gastos médicos veterinarios para perros y gatos con diferentes niveles de cobertura.
+            </p>
+            <ul>
+              <li>Consultas, cirugías y hospitalización.</li>
+              <li>Coberturas por accidentes y enfermedades.</li>
+              <li>Opciones con responsabilidad civil incluida.</li>
+            </ul>
+            <button class="quote-button" data-scroll="#contact">Cotizar ahora</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- BRANDS -->
+    <section class="brands-section">
+      <div class="container">
+        <div class="brands-track" id="brandsTrack">
+          <!-- PRIMERA VUELTA -->
+          <div class="brand-logo"><img src="./src/assets/brands/ahoy.svg" alt="Ahoy" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Ascendant.png" alt="Ascendant" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/besso.png" alt="Besso" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Corvus.png" alt="Corvus" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/coterie.png" alt="Coterie" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/First.png" alt="First" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Foxquilt.png" alt="Foxquilt" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/great2.png" alt="Great American" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Hagerty.png" alt="Hagerty" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Hiscox_logo.png" alt="Hiscox" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Jewelers Mutual.png" alt="Jewelers Mutual" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Kangaroo2.png" alt="Kangaroo" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/logo-prime.svg" alt="Prime" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/loydsoflondon.png" alt="Lloyds of London" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/national-general.png" alt="National General" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Next.svg" alt="Next" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Slice.png" alt="Slice" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/thimble_logo.png" alt="Thimble" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/three.png" alt="Three" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Transportation.png" alt="Transportation" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/travelers-logo.png" alt="Travelers" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/United Auto.svg" alt="United Auto" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/usli.png" alt="USLI" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/web_Kinsale.png" alt="Kinsale" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Zurich_Insurance_Horizontal.png" alt="Zurich" /></div>
+
+          <!-- SEGUNDA VUELTA PARA EFECTO CONTINUO -->
+          <div class="brand-logo"><img src="./src/assets/brands/ahoy.svg" alt="Ahoy" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Ascendant.png" alt="Ascendant" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/besso.png" alt="Besso" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Corvus.png" alt="Corvus" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/coterie.png" alt="Coterie" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/First.png" alt="First" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Foxquilt.png" alt="Foxquilt" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/great2.png" alt="Great American" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Hagerty.png" alt="Hagerty" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Hiscox_logo.png" alt="Hiscox" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Jewelers Mutual.png" alt="Jewelers Mutual" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Kangaroo2.png" alt="Kangaroo" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/logo-prime.svg" alt="Prime" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/loydsoflondon.png" alt="Lloyds of London" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/national-general.png" alt="National General" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Next.svg" alt="Next" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Slice.png" alt="Slice" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/thimble_logo.png" alt="Thimble" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/three.png" alt="Three" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Transportation.png" alt="Transportation" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/travelers-logo.png" alt="Travelers" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/United Auto.svg" alt="United Auto" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/usli.png" alt="USLI" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/web_Kinsale.png" alt="Kinsale" /></div>
+          <div class="brand-logo"><img src="./src/assets/brands/Zurich_Insurance_Horizontal.png" alt="Zurich" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contact" class="leadform-shell fade-in">
+      <div class="container">
+        <form class="lead-form" id="contactForm">
+          <h2>Contáctanos</h2>
+          <p>Déjanos tus datos y nos pondremos en contacto contigo pronto.</p>
+
+          <div class="lead-form__body">
+            <div class="form-row">
+              <div class="field">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ingresa tu nombre completo" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" required placeholder="tu@email.com" />
+              </div>
+              <div class="field">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required placeholder="(555) 123-4567" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="seguro">Seguro de Interés</label>
+                <select id="seguro" name="seguro" required>
+                  <option value="">Selecciona un seguro</option>
+                  <option value="auto">Auto Insurance</option>
+                  <option value="home">Home Insurance</option>
+                  <option value="health">Health Insurance</option>
+                  <option value="life">Life Insurance</option>
+                  <option value="hurricane_flood">Hurricane / Flood Insurance</option>
+                  <option value="business">Business Insurance</option>
+                  <option value="condo">Condo Insurance</option>
+                  <option value="boat">Boat Insurance</option>
+                  <option value="renters">Renters Insurance</option>
+                  <option value="pet">Pet Insurance</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="primary-btn" type="submit">Enviar solicitud</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- UBICACIÓN -->
+    <section id="ubicacion" class="cta-map-section fade-in">
+      <div class="container cta-map">
+        <div class="cta-map__content">
+          <h2 class="cta-map__title">Nuestra Ubicación</h2>
+          <p class="cta-map__text">
+            Visítanos o agenda una cita. Estamos listos para ayudarte a proteger lo que más valoras.
+          </p>
+        </div>
+        <div class="cta-map__map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.455087362744!2d-80.19362!3d25.76168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDQ1JzQyLjAiTiA4MMKwMTEnMzcuMCJX!5e0!3m2!1sen!2sus!4v1234567890"
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>NexxInsurance</h3>
+        <p>Protección sin límites para lo que más valoras.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="X">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <p>📞 +1 (555) 123-4567</p>
+        <p>✉️ info@nexxinsurance.com</p>
+        <p>📍 123 Anywhere St., Miami, FL</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Enlaces Rápidos</h3>
+        <a href="#seguros">Nuestros Seguros</a>
+        <a href="#nosotros">Quiénes Somos</a>
+        <a href="#contact">Contacto</a>
+        <a href="#ubicacion">Ubicación</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Horario</h3>
+        <p>Lunes - Viernes: 9am - 6pm</p>
+        <p>Sábado: 10am - 2pm</p>
+        <p>Domingo: Cerrado</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> NexxInsurance. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Año del footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Toggle menú móvil
+    const navToggle = document.getElementById("navToggle");
+    const navMobileMenu = document.getElementById("navMobileMenu");
+
+    navToggle.addEventListener("click", () => {
+      navToggle.classList.toggle("nav-toggle--open");
+      navMobileMenu.classList.toggle("nav-menu-mobile--open");
+    });
+
+    // Scroll suave
+    function smoothScrollTo(targetSelector) {
+      const target = document.querySelector(targetSelector);
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    document.querySelectorAll(".nav-link").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-target");
+        if (!target) return;
+        smoothScrollTo(target);
+        navMobileMenu.classList.remove("nav-menu-mobile--open");
+        navToggle.classList.remove("nav-toggle--open");
+      });
+    });
+
+    document
+      .querySelectorAll("[data-scroll]")
+      .forEach((btn) =>
+        btn.addEventListener("click", () =>
+          smoothScrollTo(btn.getAttribute("data-scroll"))
+        )
+      );
+
+    // IntersectionObserver para .fade-in
+    const fadeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll(".fade-in").forEach((el) => fadeObserver.observe(el));
+
+    // Animación tarjetas seguros
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.delay || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.insurance-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Smooth anchors
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+
+    // BRANDS: auto-scroll suave corregido
+    const brandsTrack = document.getElementById("brandsTrack");
+    let brandsPaused = false;
+
+    if (brandsTrack) {
+      brandsTrack.addEventListener("mouseenter", () => (brandsPaused = true));
+      brandsTrack.addEventListener("mouseleave", () => (brandsPaused = false));
+      brandsTrack.addEventListener("touchstart", () => (brandsPaused = true));
+      brandsTrack.addEventListener("touchend", () => (brandsPaused = false));
+
+      setInterval(() => {
+        if (!brandsTrack || brandsPaused) return;
+        const step = 0.5;
+        const maxScroll = brandsTrack.scrollWidth - brandsTrack.clientWidth;
+        if (maxScroll <= 0) return;
+        let next = brandsTrack.scrollLeft + step;
+        if (next >= maxScroll) next = 0;
+        brandsTrack.scrollLeft = next;
+      }, 40);
+    }
+
+    // Form submit
+    document
+      .getElementById("contactForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("¡Gracias por tu interés! Nos pondremos en contacto contigo pronto.");
+        this.reset();
+      });
+  </script>
+</body>
+</html>
